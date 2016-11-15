@@ -1,0 +1,10 @@
+Header header
+bool do_open_interface
+bool do_close_interface
+bool do_set_robot_ready_mode
+bool do_set_robot_running_mode
+bool do_set_robot_freedrive_mode
+bool do_set_security_stop
+bool do_unlock_security_stop
+bool do_set_power_on_robot
+bool do_set_power_off_robot

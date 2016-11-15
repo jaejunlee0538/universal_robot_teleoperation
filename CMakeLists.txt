@@ -1,0 +1,3 @@
+add_subdirectory(ur_control_box)
+add_subdirectory(ur_teleop_commons)
+add_subdirectory(ur_teleop_ros_client)

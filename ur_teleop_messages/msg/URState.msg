@@ -1,0 +1,13 @@
+Header header
+uint8 robot_mode
+float64 robot_time
+bool is_robot_connected
+bool is_power_on_robot
+bool is_security_stopped
+bool is_emergency_stopped
+bool is_extra_button_pressed
+bool is_power_button_pressed
+bool is_safety_signal_such_taht_we_should_stop
+uint8[6] joint_modes
+float64[6] q_actual
+float64[6] qd_actual

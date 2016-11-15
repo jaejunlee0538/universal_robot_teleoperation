@@ -1,0 +1,13 @@
+<launch>
+	<arg name="robot_ip"/>
+	<arg name="port_number" default="50001"/>
+	<arg name="limited" default="false"/>
+	<include file="$(find ur_description)/launch/ur5_upload.launch">
+		<arg name="limited" value="$(arg limited)"/>
+	</include>
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+	<node name="ur5_ros_client" pkg="ur_teleop_ros_client" type="main_ur_ros_client">
+		<param name="robot_ip" value="$(arg robot_ip)"/>
+		<param name="port_number" value="$(arg port_number)"/>
+	</node>
+</launch>

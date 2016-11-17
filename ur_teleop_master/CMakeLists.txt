@@ -1,11 +1,12 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(ur_teleop_master)
 
+set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${PROJECT_SOURCE_DIR}/../auxiliary/cmake_modules")
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED roscpp)
-
+find_package(catkin REQUIRED roscpp tf)
+find_package(Eigen3 REQUIRED)
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
@@ -20,8 +21,8 @@ INCLUDE_DIRS include ${OMEGA6_LIBRARY_DIR}
 
 include_directories(
         include
+        ${EIGEN3_INCLUDE_DIR}
 )
-
 
 add_library(haptic_device_interface STATIC src/Button.cpp)
 

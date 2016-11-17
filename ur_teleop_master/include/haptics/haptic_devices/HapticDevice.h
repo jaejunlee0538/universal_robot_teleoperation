@@ -16,7 +16,7 @@ public:
     virtual bool getTranslation(double& x, double& y, double& z) = 0;
     virtual bool getLinearVelocity(double& vx, double& vy, double& vz) = 0;
     virtual size_t numberOfButtons() const = 0 ;
-    virtual bool getButtonPressed(bool& pressed ,const size_t& button_idx) = 0;
+    virtual bool getButtonPressed(const size_t& button_idx) = 0;
     virtual bool getOrientation(double& qx, double& qy, double& qz, double& qw) = 0;
     virtual bool setForce(const double& fx, const double& fy, const double& fz) = 0;
     virtual bool isTorqueAvilable() const = 0;

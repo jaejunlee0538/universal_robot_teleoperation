@@ -1,0 +1,7 @@
+<launch>
+    <arg name="device" default="Omega6"/>
+    <node name="haptic_device" type="rviz" pkg="rviz" args="$(find ur_teleop_master)/haptic_device.rviz"/>
+    <node name="test_haptic_device" type="example_friction_mode" pkg="ur_teleop_master" output="screen">
+        <param name="device" type="str" value="$(arg device)"/>
+    </node>
+</launch>

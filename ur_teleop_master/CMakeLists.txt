@@ -24,10 +24,11 @@ include_directories(
         ${EIGEN3_INCLUDE_DIR}
 )
 
-add_library(haptic_device_interface STATIC src/Button.cpp)
+# get all header files under include directory
+file(GLOB HEADERS include "*.h")
 
-add_library(haptic_device_omega6 STATIC src/Omega6.cpp)
-target_link_libraries(haptic_device_omega6 haptic_device_interface ${OMEGA6_LIBRARIES})
+add_library(haptic_device STATIC ${HEADERS} src/Button.cpp src/OmegaDevice.cpp)
+target_link_libraries(haptic_device ${OMEGA6_LIBRARIES})
 
 add_executable(example_friction_mode src/ExampleFrictionMode.cpp)
-target_link_libraries(example_friction_mode haptic_device_omega6 ${catkin_LIBRARIES})
+target_link_libraries(example_friction_mode haptic_device ${catkin_LIBRARIES} ${HEADERS})

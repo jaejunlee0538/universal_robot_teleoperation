@@ -29,6 +29,10 @@ void Button::update(bool pressed) {
     this->btn = state;
 }
 
+bool Button::isPressed() const{
+    return btn == BUTTON_ON;
+}
+
 int Button::edge() const{
     return btn_changes;
 }

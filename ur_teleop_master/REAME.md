@@ -10,7 +10,8 @@ Haptic device packages for master device of teleoperation.
 
 ## Supported Devices
 
- * **Omega6(Force-Dimensions)**
+ * **Omega6(Tested)**
+ * **Omega3(Tested)**
  * **~~Phantom~~(TODO)**
 
 
@@ -20,7 +21,7 @@ Haptic device packages for master device of teleoperation.
  
  The following images describe re-defined coordinates  systems.
  
-### 1. Omega6
+### 1. OmegaHapticDevice
 
-  ![Omega6 Coordinates System](Omega6_coordinate_system.png)
+  ![OmegaHapticDevice Coordinates System](Omega6_coordinate_system.png)
 

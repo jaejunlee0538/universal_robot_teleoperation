@@ -2,7 +2,7 @@
 // Created by ub1404 on 16. 11. 15.
 //
 #include <ros/ros.h>
-#include <haptics/haptic_devices/Omega6.h>
+#include <haptics/haptic_devices/OmegaDevice.h>
 #include <tf/tf.h>
 #include <tf/transform_broadcaster.h>
 
@@ -19,15 +19,15 @@ int main(int argc,char** argv){
         ROS_ERROR("Required parameter \'device\' is missing.");
         return 0;
     }
-    std::transform(device_type.begin(), device_type.end(), device_type.begin(),tolower);
 
     HapticDevice* device = NULL;
-    if(device_type == "omega6"){
-        if(Omega6::getNumberOfDevices() == 0){
+    if(device_type == "OmegaDevice"){
+        if(OmegaDevice::getNumberOfDevices() == 0){
             ROS_INFO("No available haptic devices");
             return 0;
         }
-        device = new Omega6(0);
+        ROS_INFO("%d devices are available", OmegaDevice::getNumberOfDevices());
+        device = new OmegaDevice(0);
     }else{
         ROS_ERROR("Undefined device type \'%s\'",device_type.c_str());
         return 0;
@@ -35,7 +35,7 @@ int main(int argc,char** argv){
 
     ///////////////////////////////////////////////////////
     if(!device->open()){
-        ROS_INFO("Cannot open haptic device");
+        ROS_INFO("Cannot open haptic device[%s]", device->getErrorMessage());
         return 0;
     }
     ROS_INFO("Starting Haptic Loop");
@@ -47,9 +47,12 @@ int main(int argc,char** argv){
     transform.frame_id_ = "world";
     transform.child_frame_id_ = "haptic_device";
     while(ros::ok()){
+        device->update();
+        printf("%s ", device->getDeviceName());
+
         //Buttons
         for(size_t i=0;i<device->numberOfButtons();i++){
-            printf("\t%c ", device->getButtonPressed(i)?'O':'X');
+            printf("\t%c ", device->getButton(i).isPressed()?'O':'X');
         }
 
         //Translation
@@ -73,6 +76,8 @@ int main(int argc,char** argv){
 //            printf("%6.1lf %6.1lf %6.1lf ", RAD2DEG(RPY[2]),RAD2DEG(RPY[1]),RAD2DEG(RPY[0]));
 //            Eigen::Vector3d RPY= q.matrix().eulerAngles(2,1,0);
             transform.setRotation(tf::Quaternion(q.x(), q.y(), q.z(), q.w()));
+        }else{
+            transform.setRotation(tf::Quaternion(0,0,0,1));
         }
         printf("\r");
         fflush(stdout);

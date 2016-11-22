@@ -32,6 +32,8 @@ public:
      */
     void update(bool pressed);
 
+    bool isPressed() const;
+
     /*
      * return transition of the button's state.
      *   On->Off : ON_TO_OFF

@@ -35,7 +35,8 @@ protected:
     int device_id;//When openning the device, this should be used
     int device_id_internal;//unique device id assigned by dh-sdk.
     bool wrist_available;
-
+    bool setForce_called;
+    
     Eigen::Vector3d xyz;
     Eigen::Vector3d xyz_vel;
     Eigen::Quaterniond rotation;

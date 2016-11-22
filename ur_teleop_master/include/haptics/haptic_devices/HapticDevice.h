@@ -7,12 +7,40 @@
 #include "Button.h"
 #include <cstdio>
 #include <cstdarg>
+
+/*
+
+ intended use
+
+ HapticDevice * device = new SomeDevice();
+ if(!device->open()){
+    std::cout<<device->getErrorMessage()<<std::endl;
+    return 0;
+ }
+
+ double x,y,z;
+ double fx,fy,fz;
+ while(some_condition){
+    device->update();
+    device->getTranslation(x,y,z);
+    //do something...
+    device->setForce(fx,fy,fz);
+ }
+
+ */
 class HapticDevice {
 public:
     HapticDevice(){err_msg[0]=NULL;}
     virtual ~HapticDevice(){}
     virtual bool open() = 0;
     virtual void close() =0;
+
+    /*
+     * Acquiring current position and orientation from haptic device
+     * should be implemented here.
+     *
+     * This method must be called at the beginning of each haptic loop
+     */
     virtual void update() = 0;
 
     //translational

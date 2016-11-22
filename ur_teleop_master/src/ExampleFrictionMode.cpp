@@ -83,7 +83,7 @@ int main(int argc,char** argv){
         fflush(stdout);
 
         //Set Friction Force
-        device->setForce(K*vx, K*vy,K*vz);
+        device->setForce(K*vx, K*vy, K*vz);
 
         //Send transform
         tf_broad.sendTransform(transform);

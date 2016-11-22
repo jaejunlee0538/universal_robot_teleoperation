@@ -38,6 +38,8 @@ bool OmegaDevice::open(){
 
     //
     dhdEnableForce(DHD_ON, device_id_internal);
+
+    setForce_called = false;
     return true;
 }
 
@@ -51,6 +53,13 @@ bool OmegaDevice::isOrientationAvailable() const{
 }
 
 void OmegaDevice::update(){
+    if(!setForce_called){
+        //If setForce was not called after the last 'update' call,
+        //force to it to be called with zero force.
+        setForce(0,0,0);
+    }
+    setForce_called = false;
+
     //update translation
     Eigen::Vector3d tmp;
     dhdGetPosition(&tmp[0], &tmp[1], &tmp[2], device_id_internal);
@@ -113,6 +122,7 @@ bool OmegaDevice::getOrientation(double& qx, double& qy, double& qz, double& qw)
 }
 
 bool OmegaDevice::setForce(const double& fx, const double& fy, const double& fz){
+    setForce_called = true;
     Eigen::Vector3d f(fx, fy, fz);
     f = R_origin_to_ref * f;
     if(dhdSetForce(f[0], f[1], f[2], device_id_internal) < 0){
